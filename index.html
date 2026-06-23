@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Name | Premium Comfort Footwear</title>
+    <!-- Premium Google Fonts for modern depth -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CUSTOM COLOR PALETTE & VARIABLES --- */
+        :root {
+            --bg-gradient-start: #0f111a; /* Rich slate dark canvas */
+            --bg-gradient-end: #1e2235;   /* Deep backyard tone */
+            --card-bg: #ffffff;           /* Pop-out premium white cards */
+            --text-dark: #1e2230;         /* Deep contrast text for inside cards */
+            --text-light: #ffffff;        /* Crisp white text for dark areas */
+            --text-muted: #64748b;        /* Subtle slate text */
+            --accent-orange: #ff6b35;     /* Legacy vibrant brand orange accent */
+            --accent-glow: rgba(255, 107, 53, 0.4);
+            --shadow-3d: 0 20px 40px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.2);
+            --card-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- GLOBAL BASE STYLES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            /* Gives the "backyard" rich real-world lighting depth instead of being flat */
+            background: radial-gradient(circle at center, var(--bg-gradient-end) 0%, var(--bg-gradient-start) 100%);
+            background-attachment: fixed;
+            color: var(--text-light);
+            min-height: 100vh;
+            padding-bottom: 60px;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .nav-item {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* --- CONTAINER STRUCTURE --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- HEADER & BRANDING --- */
+        .header-brand {
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* --- NAVIGATION BAR --- */
+        .navbar {
+            background: var(--card-bg);
+            border-radius: 50px;
+            padding: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-3d);
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            padding: 14px 10px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+        }
+
+        /* Active state layout following your designs */
+        .nav-item.active {
+            background: var(--bg-gradient-start);
+            color: var(--text-light) !important;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .nav-item.inactive-tab {
+            color: #cbd5e1; /* Faded inactive look matching your images */
+        }
+
+        /* --- APPLICATION APP SECTIONS --- */
+        .app-section {
+            display: none;
+            animation: sectionFadeIn 0.5s ease forwards;
+        }
+
+        .app-section.active-section {
+            display: block;
+        }
+
+        @keyframes sectionFadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- REUSABLE COMPONENT CARDS --- */
+        .premium-card {
+            background: var(--card-bg);
+            color: var(--text-dark);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: var(--shadow-3d);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Card Hover Animation */
+        .premium-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 4px 10px var(--accent-glow);
+        }
+
+        /* Click Pulse Animation */
+        .premium-card:active {
+            animation: cardPulse 0.3s ease-out;
+        }
+
+        @keyframes cardPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.98); }
+            100% { transform: scale(1.01); }
+        }
+
+        /* --- HOMEPAGE SPECIFIC SECTION (image_2.png) --- */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-text h2 {
+            font-size: 3.2rem;
+            line-height: 1.15;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        /* IMAGE CAROUSEL SYSTEM */
+        .carousel-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .carousel-container {
+            width: 100%;
+            height: 380px;
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow-3d);
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .carousel-slide.active-slide {
+            opacity: 1;
+        }
+
+        /* Carousel Navigation Buttons Overlay */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 55px;
+            height: 55px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: none;
+            box-shadow: var(--shadow-3d);
+            z-index: 10;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            transition: all 0.2s ease;
+        }
+
+        .carousel-btn:hover {
+            background: var(--accent-orange);
+            color: var(--text-light);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn.left { left: -25px; }
+        .carousel-btn.right { right: -25px; }
+
+        /* Carousel Indicators Dots */
+        .carousel-dots {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active-dot {
+            background: var(--text-light);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .about-row {
+            margin-top: 20px;
+        }
+
+        .about-row p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        /* --- SERVICES SECTION (image_4.png) --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+        }
+
+        .services-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* Orange border menu signature accent from legacy design */
+        .service-item {
+            border-left: 6px solid var(--accent-orange);
+            padding-left: 20px;
+        }
+
+        .service-item h3 {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .service-item p {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* SLIDER COMPONENT AREA */
+        .slider-showcase {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 450px;
+        }
+
+        /* Slow rotating visual star badge graphic behind picture */
+        .rotating-shape-bg {
+            position: absolute;
+            width: 440px;
+            height: 440px;
+            background: rgba(255, 255, 255, 0.04);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: slowRotate 25s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes slowRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Fading image frame container */
+        .fading-system-container {
+            width: 320px;
+            height: 400px;
+            background: var(--card-bg);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-3d);
+            z-index: 2;
+        }
+
+        .slider-image-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Text overlay anchors matching template diagram label positions */
+        .state-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 2px;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .state-label.before-label { left: -50px; text-align: right; }
+        .state-label.after-label { right: -50px; }
+
+        /* Custom control switch design styles */
+        .toggle-switch-bar {
+            width: 140px;
+            height: 34px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 30px;
+            margin-top: 35px;
+            position: relative;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .toggle-handle {
+            width: 65px;
+            height: 28px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            position: absolute;
+            top: 3px;
+            left: 4px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .toggle-switch-bar.active-state .toggle-handle {
+            left: 71px;
+            background: var(--accent-orange);
+        }
+
+        /* --- CONTACT SECTION (image_3.png) --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .contact-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-row-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .contact-media-box {
+            width: 100%;
+            height: 350px;
+            background: var(--card-bg);
+            border-radius: 28px;
+            background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80');
+            background-size: cover;
+            background-position: center;
+            box-shadow: var(--shadow-3d);
+        }
+
+        /* --- REVIEWS SECTION (image_5.png) --- */
+        .reviews-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .reviews-grid-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .center-review-wrapper {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .center-review-wrapper .premium-card {
+            width: 60%;
+        }
+
+        .review-card-item {
+            opacity: 0; /* Animated sequentially via javascript triggers */
+        }
+
+        /* Staggered sequential rendering styles */
+        .review-card-item.reveal-review {
+            animation: reviewPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes reviewPop {
+            from { opacity: 0; transform: scale(0.8) translateY(30px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .review-card-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .review-quote {
+            font-style: italic;
+            margin-bottom: 12px;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        .review-stars {
+            color: #f59e0b;
+            font-size: 1.2rem;
+        }
+
+        /* INFINITE MARQUEE KEYWORD TICKER COMPONENT */
+        .ticker-tape-container {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            background: #0b0c12;
+            padding: 18px 0;
+            overflow: hidden;
+            margin-top: 50px;
+            box-shadow: inset 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .ticker-tape-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeInfinite 22s linear infinite;
+        }
+
+        .ticker-phrase {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            padding: 0 40px;
+            white-space: nowrap;
+        }
+
+        .ticker-phrase span {
+            color: var(--accent-orange);
+        }
+
+        @keyframes marqueeInfinite {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- RESPONSIVE STRUCTURAL MEDIA QUERIES (Mobile Engine Layouts) --- */
+        @media (max-width: 968px) {
+            .hero-grid, .services-grid, .contact-grid {
+                grid-template-columns: 1fr; /* Content stacks vertically on mobile */
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-text h2 {
+                font-size: 2.4rem;
+            }
+
+            .carousel-btn.left { left: 10px; }
+            .carousel-btn.right { right: 10px; }
+
+            .service-item {
+                border-left: none;
+                border-top: 4px solid var(--accent-orange); /* Adaptive layout change for mobile cards */
+                padding-left: 0;
+                padding-top: 15px;
+            }
+
+            .state-label { display: none; } /* Hide labels on mobile to avoid overlapping */
+
+            .contact-row-item {
+                justify-content: center;
+            }
+
+            .reviews-grid-box {
+                grid-template-columns: 1fr;
+            }
+
+            .center-review-wrapper .premium-card {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                border-radius: 20px;
+                flex-wrap: wrap;
+                padding: 10px;
+            }
+            .nav-item {
+                flex: unset;
+                width: 50%; /* 2x2 grid layout balance for navigation elements on narrow mobile frames */
+                font-size: 0.95rem;
+                padding: 10px;
+            }
+            .carousel-container {
+                height: 260px;
+            }
+            .rotating-shape-bg {
+                width: 280px;
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Main Brand Space Header -->
+        <div class="header-brand">BUSINESS NAME</div>
+
+        <!-- System Pill Navigation Menu Component Wrapper -->
+        <nav class="navbar">
+            <a class="nav-item active" onclick="switchTab('homepage', this)">Homepage</a>
+            <a class="nav-item inactive-tab" onclick="switchTab('services', this)">Services</a>
+            <a class="nav-item inactive-tab" onclick="switchTab('contact', this)">Contact</a>
+            <a class="nav-item inactive-tab" onclick="switchTab('reviews', this)">Reviews</a>
+        </nav>
+
+        <!-- HOMEPAGE LAYOUT APPARATUS (image_2.png) -->
+        <div id="homepage" class="app-section active-section">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <h2>TOP Comfort Footwear in the Area</h2>
+                </div>
+                <div class="carousel-wrapper">
+                    <div class="carousel-container">
+                        <!-- High quality comfort footwear imagery -->
+                        <div class="carousel-slide active-slide" style="background-image: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80')"></div>
+                        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80')"></div>
+                        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=600&q=80')"></div>
+                    </div>
+                    <!-- Navigation triggers -->
+                    <button class="carousel-btn left" onclick="changeSlide(-1)">&#10094;</button>
+                    <button class="carousel-btn right" onclick="changeSlide(1)">&#10095;</button>
+                    <!-- Visual tracking nodes tracker dots -->
+                    <div class="carousel-dots">
+                        <div class="dot active-dot" onclick="setSlide(0)"></div>
+                        <div class="dot" onclick="setSlide(1)"></div>
+                        <div class="dot" onclick="setSlide(2)"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-row">
+                <p>Engineered for all-day cushioning and performance. Discover our handcrafted responsive sole designs built right here in Texas to keep your feet relaxed through any schedule or activity.</p>
+                <p style="margin-top: 15px; font-weight: 600; color: var(--accent-orange);">Hours: Mon-Sat: 9:00 AM - 8:00 PM | Sun: Closed</p>
+            </div>
+        </div>
+
+        <!-- SERVICES LAYOUT APPARATUS (image_4.png) -->
+        <div id="services" class="app-section">
+            <div class="services-grid">
+                <div class="services-list">
+                    <div class="service-item">
+                        <h3>Orthotic Running Models</h3>
+                        <p>Maximum shock absorption framework designed with breathable carbon mesh alignments.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Ergonomic Daily Walkers</h3>
+                        <p>Memory foam structured insoles perfectly matching unique foot geometry blueprints.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Premium Recover Sandals</h3>
+                        <p>Post-training dynamic relief systems crafted with hyper-flexible compound properties.</p>
+                    </div>
+                </div>
+                <div class="slider-showcase">
+                    <!-- Star matrix layout element rotating slowly in background -->
+                    <div class="rotating-shape-bg"></div>
+                    
+                    <div class="state-label before-label">BEFORE</div>
+                    <div class="fading-system-container">
+                        <!-- Image 1: Raw Materials/Unpolished Brand Shoes Base -->
+                        <div id="beforeImg" class="slider-image-layer" style="background-image: url('https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=600&q=80'); opacity: 1;"></div>
+                        <!-- Image 2: Assembled Premium Shoes Model Final Step -->
+                        <div id="afterImg" class="slider-image-layer" style="background-image: url('https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80'); opacity: 0;"></div>
+                    </div>
+                    <div class="state-label after-label">AFTER</div>
+
+                    <!-- Slide Bar Animation Switch component -->
+                    <div class="toggle-switch-bar" id="photoToggle" onclick="toggleBeforeAfter()">
+                        <div class="toggle-handle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT LAYOUT APPARATUS (image_3.png) -->
+        <div id="contact" class="app-section">
+            <div class="contact-grid">
+                <div class="contact-info-list">
+                    <div class="contact-row-item">
+                        <span class="contact-icon">✉️</span>
+                        <span>support@comfortfootwear.com</span>
+                    </div>
+                    <div class="contact-row-item">
+                        <span class="contact-icon">📞</span>
+                        <span>(972) 555-0192</span>
+                    </div>
+                    <div class="contact-row-item">
+                        <span class="contact-icon">👤</span>
+                        <span>@PremiumComfortPlano</span>
+                    </div>
+                    <div class="contact-row-item">
+                        <span class="contact-icon">🏢</span>
+                        <span>1201 E Spring Creek Pkwy, Plano, TX</span>
+                    </div>
+                </div>
+                <!-- Contact Right Box Media Frame Placeholder -->
+                <div class="contact-media-box"></div>
+            </div>
+        </div>
+
+        <!-- REVIEWS LAYOUT APPARATUS (image_5.png) -->
+        <div id="reviews" class="app-section">
+            <div class="reviews-layout">
+                <div class="reviews-grid-box">
+                    <div class="premium-card review-card-item">
+                        <h4>Review #1 - Sarah M.</h4>
+                        <p class="review-quote">"Felt like walking on clouds instantly. My lower back pain disappeared after two days of using these daily."</p>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                    <div class="premium-card review-card-item">
+                        <h4>Review #2 - James K.</h4>
+                        <p class="review-quote">"Outstanding structural arch support profiles. Excellent materials that handle long training sessions easily."</p>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                </div>
+                <div class="center-review-wrapper">
+                    <div class="premium-card review-card-item">
+                        <h4>Review #3 - Elena R.</h4>
+                        <p class="review-quote">"The premium memory foam system adapts beautifully. Highly recommend for any healthcare workers working long shifts."</p>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loop scrolling dynamic base keyphrase marquee ticker -->
+            <div class="ticker-tape-container">
+                <div class="ticker-tape-track">
+                    <div class="ticker-phrase">"WALKING ON CLOUDS" - <span>Sarah M.</span></div>
+                    <div class="ticker-phrase">"OUTSTANDING STRUCTURAL SUPPORT" - <span>James K.</span></div>
+                    <div class="ticker-phrase">"PERFECT FOR LONG SHIFTS" - <span>Elena R.</span></div>
+                    <!-- Duplicate node sequence array list to ensure seamless endless tracking canvas loops -->
+                    <div class="ticker-phrase">"WALKING ON CLOUDS" - <span>Sarah M.</span></div>
+                    <div class="ticker-phrase">"OUTSTANDING STRUCTURAL SUPPORT" - <span>James K.</span></div>
+                    <div class="ticker-phrase">"PERFECT FOR LONG SHIFTS" - <span>Elena R.</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- --- JAVASCRIPT SYSTEM ENGINE CONTROLS --- -->
+    <script>
+        /* --- APPLICATION TAB SWITCH ROUTINE --- */
+        function switchTab(targetSectionId, navElement) {
+            // Update Navigation Menu Active Node State Layout Classes
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.add('inactive-tab');
+            });
+            navElement.classList.add('active');
+            navElement.classList.remove('inactive-tab');
+
+            // Toggle active visibility parameters across matching section items
+            document.querySelectorAll('.app-section').forEach(section => {
+                section.classList.remove('active-section');
+            });
+            
+            const targetSection = document.getElementById(targetSectionId);
+            targetSection.classList.add('active-section');
+
+            // Staggered sequential trigger for reviews array when navigation lands on the reviews view 
+            if (targetSectionId === 'reviews') {
+                triggerReviewsPop();
+            } else {
+                resetReviewsPop();
+            }
+        }
+
+        /* --- HOMEPAGE IMAGE CAROUSEL SYSTEM CONTROLS --- */
+        let activeSlideIdx = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function updateCarouselDisplay() {
+            slides.forEach((slide, idx) => {
+                if (idx === activeSlideIdx) {
+                    slide.classList.add('active-slide');
+                    dots[idx].classList.add('active-dot');
+                } else {
+                    slide.classList.remove('active-slide');
+                    dots[idx].classList.remove('active-dot');
+                }
+            });
+        }
+
+        function changeSlide(directionOffset) {
+            activeSlideIdx += directionOffset;
+            if (activeSlideIdx >= slides.length) activeSlideIdx = 0;
+            if (activeSlideIdx < 0) activeSlideIdx = slides.length - 1;
+            updateCarouselDisplay();
+        }
+
+        function setSlide(targetIndex) {
+            activeSlideIdx = targetIndex;
+            updateCarouselDisplay();
+        }
+
+        /* --- SERVICES BEFORE/AFTER TOGGLE FADE SWITCH SYSTEM --- */
+        function toggleBeforeAfter() {
+            const toggleBar = document.getElementById('photoToggle');
+            const beforeImage = document.getElementById('beforeImg');
+            const afterImage = document.getElementById('afterImg');
+
+            if (toggleBar.classList.contains('active-state')) {
+                // Return to original state (Before)
+                toggleBar.classList.remove('active-state');
+                beforeImage.style.opacity = "1";
+                afterImage.style.opacity = "0";
+            } else {
+                // Advance to updated state (After)
+                toggleBar.classList.add('active-state');
+                beforeImage.style.opacity = "0";
+                afterImage.style.opacity = "1";
+            }
+        }
+
+        /* --- REVIEWS SEQUENTIAL POP RENDERING CONTROLS --- */
+        function triggerReviewsPop() {
+            const reviewsArray = document.querySelectorAll('.review-card-item');
+            reviewsArray.forEach((card, index) => {
+                // Creates a staggered 2-second fade-in sequence
+                setTimeout(() => {
+                    card.classList.add('reveal-review');
+                }, index * 400); // 400ms interval delay builds a smooth aesthetic waterfall cascade
+            });
+        }
+
+        function resetReviewsPop() {
+            document.querySelectorAll('.review-card-item').forEach(card => {
+                card.classList.remove('reveal-review');
+            });
+        }
+    </script>
+</body>
+</html>
